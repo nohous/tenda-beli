@@ -43,7 +43,6 @@ class BeliController:
         return r.json()
     def toggle(self):
         state = self.get_state()["data"]["status"]
-        print(state)
         if state == 1:
             self.turn_off()
         else:
