@@ -50,7 +50,7 @@ class BeliController:
             self.turn_on()
 
 @click.group()
-@click.option("--ip", default="192.168.25.1", help="IP of the device")
+@click.option("--ip", default="172.21.42.25", help="IP of the device")
 def cli(ip):
     global beli
     beli = BeliController(ip)
@@ -76,7 +76,14 @@ def turn_off():
     beli.turn_off()
 @cli.command()
 def get_state():
-    beli.get_state()
+    state = beli.get_state()["data"]["status"]
+    if state == 1:
+        print("on")
+    elif state == 0:
+        print("off")
+    else:
+        print("unknown")
+
 @cli.command()
 def toggle():
     beli.toggle()
